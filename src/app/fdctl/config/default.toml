@@ -4,7 +4,7 @@
 # When starting a Firedancer instance, it will potentially load, reset,
 # or overwrite any state created by a prior, or currently running
 # instance with the same name.
-name = "fd1"
+name = "Chainflow_Firedancer"
 
 # The operating system user to permission data and run Firedancer as.
 # Firedancer needs to start privileged, either with various capabilities
@@ -28,7 +28,7 @@ name = "fd1"
 # default, it will use the terminal user which is starting the program.
 # If running as sudo, the terminal user is not root but the user which
 # invoked sudo.
-user = ""
+user = "cflowfduser01"
 
 # Absolute directory path to place scratch files used during setup and
 # operation.  The ledger and accounts databases will also be placed in
@@ -128,7 +128,10 @@ dynamic_port_range = "8900-9000"
     # Routable DNS name or IP address and port number to use to
     # rendezvous with the gossip cluster.  These entrypoints are passed
     # to the Solana Labs client with the `--entrypoint` argument.
-    entrypoints = []
+    entrypoints = ["entrypoint.testnet.solana.com:8001",
+      "entrypoint2.testnet.solana.com:8001",
+      "entrypoint3.testnet.solana.com:8001",
+    ]
 
     # If true, checks at startup that at least one of the provided
     # entrypoints can connect to this validator on all necessary ports.
@@ -231,14 +234,14 @@ dynamic_port_range = "8900-9000"
     #
     # This option is passed to the Solana Labs client with the
     # `--identity` argument.
-    identity_path = ""
+    identity_path = "home/cflowfduser01/validator-keypair.json"
 
     # Absolute path to a `keypair.json` containing the identity of the
     # voting account of the validator.  If no voting account is
     # provided, voting will be disabled and the validator will cast no
     # votes.  This option is passed to the Solana Labs client with the
     # `--vote-account` argument.
-    vote_account_path = ""
+    vote_account_path = "/home/cflowfduser01/vote-keypair.json"
 
     # If false, do not attempt to fetch a snapshot from the cluster,
     # instead start from a local snapshot if one is present.  A snapshot
@@ -319,7 +322,12 @@ dynamic_port_range = "8900-9000"
     # ignored.  If no known validators are specified, any hash will be
     # accepted.  These options are passed to the Solana Labs client with
     # the `--trusted-validator` argument.
-    known_validators = []
+    known_validators = ["5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on",
+        "dDzy5SR3AXdYWVqbDEkVFdvSPCtS9ihF5kJkHCtXoFs",
+        "Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN",
+        "eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ",
+        "9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv",
+    ]
 
 # CPU cores in Firedancer are carefully managed.  Where a typical
 # program lets the operating system scheduler determine which threads to
@@ -385,7 +393,7 @@ dynamic_port_range = "8900-9000"
     #
     # It is suggested to use all available CPU cores for Firedancer, so
     # that the Solana network can run as fast as possible.
-    affinity = "0-15"
+    affinity = "0-9"
 
     # How many net tiles to run.  Each networking tile will service
     # exactly one queue from a network device being listened to.  If
@@ -396,12 +404,12 @@ dynamic_port_range = "8900-9000"
     #
     # See the comments for the [tiles.net] section below for more
     # information.
-    net_tile_count = 4
+    net_tile_count = 2
 
     # How many verify tiles to run.  Currently this also configures the
     # number of QUIC tiles to run.  QUIC and verify tiles are connected
     # 1:1.
-    verify_tile_count = 4
+    verify_tile_count = 2
 
     # How many bank tiles to run.  Multiple banks can run in parallel,
     # if they are not writing to the same accounts at the same time.
